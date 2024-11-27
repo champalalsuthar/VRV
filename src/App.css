@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,30 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+nav {
+  display: flex;
+  gap: 10px;
+  background-color: #333;
+  padding: 10px;
+  color: white;
+}
+
+nav a,
+nav button {
+  color: white;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.dashboard {
+  padding: 20px;
+  text-align: center;
 }
