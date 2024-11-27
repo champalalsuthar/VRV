@@ -11,6 +11,7 @@ const Dashboard = () => {
       {userRole === "Moderator" && <p>Moderator Controls</p>}
       <p>User Role: {userRole}</p>
     </div>
+    
   );
 };
 
