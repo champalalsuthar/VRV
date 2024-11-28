@@ -6,6 +6,7 @@ const connectToMongo = require("./config");
 const path = require("path");
 
 const addApi = require("./routes/addapi");
+const getuserbyid = require("./routes/getuserbyid");
 
 // const path = require('path');
 dotenv.config();
@@ -25,6 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use("/api", addApi);
+app.use("/api", getuserbyid);
 
 
 app.get("/", (req, res) => {

@@ -5,6 +5,7 @@ const User = require("../model/user");
 
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
+const { verifyToken } = require("../controller/addApi");
 
 // Login Route
 router.post(
@@ -62,19 +63,11 @@ router.post(
         body("first_name", "First name must be at least 2 characters long").isLength({
             min: 2,
         }),
-        body("last_name", "Last name must be at least 2 characters long").isLength({
-            min: 2,
-        }),
         body("email", "Enter a valid email").isEmail(),
-        body("password", "Password must be at least 6 characters long").isLength({
-            min: 6,
-        }),
+        // body("password", "Password must be at least 6 characters long").isLength({
+        //     min: 6,
+        // }),
         body("mobile", "Mobile number must be 10 digits").isLength({ min: 10, max: 10 }),
-        body("gender", "Gender must be either 'Male', 'Female', or 'Other'").isIn([
-            "Male",
-            "Female",
-            "Other",
-        ]),
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -116,6 +109,8 @@ router.post(
         }
     }
 );
+
+router.post("/verifytoken", verifyToken);
 
 
 module.exports = router;
