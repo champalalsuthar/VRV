@@ -8,6 +8,9 @@ import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { login, logout } from "./redux/slices/authSlice";
 import api from "./utils/api";
+import Home from "./components/Home";
+import AboutUs from "./components/AboutUs";
+import ServicesPage from "./components/ServicesPage";
 
 
 const App = () => {
@@ -62,8 +65,11 @@ const App = () => {
     <>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={< Signup />} />
+        <Route path="/aboutus" element={< AboutUs />} />
+        <Route path="/services" element={< ServicesPage />} />
         <Route
           path="/dashboard"
           element={

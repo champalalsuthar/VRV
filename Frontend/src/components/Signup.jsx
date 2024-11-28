@@ -130,7 +130,7 @@ const Signup = () => {
     };
 
     return (
-        <div className="flex items-center justify-center bg-gray-50 mt-20">
+        <div className="flex items-center justify-center bg-gray-50 mt-16">
             <div className=" bg-red-100 h-[85vh] flex flex-col w-full  rounded-md">
                 <form
                     noValidate

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion"; // For animations
 import api from "../utils/api";
 
 const Dashboard = () => {
@@ -8,29 +9,22 @@ const Dashboard = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     const _id = localStorage.getItem("id");
 
     if (!_id) {
       setError("User ID not found");
       setLoading(false);
-      // dispatch(logout());
-      // dispatch(setUserData(null));
       return;
     }
 
     const fetchData = async () => {
       try {
         const response = await api.post("/api/getuserdatabyid", { _id });
-        console.log(response)
-        console.log(response.data)
-        // dispatch(login({ token: response.data.token, role: response.data.user.type })); // Assuming backend provides token and role
-        // navigate("/dashboard");
-        // const data = await fetchUserById(userId);
         setUserDetails(response.data.user);
-        // dispatch(setUserData(data));
       } catch (err) {
-        console.error("Login failed", error)
+        console.error("Login failed", err);
         setError("Login failed");
       } finally {
         setLoading(false);
@@ -41,56 +35,84 @@ const Dashboard = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="text-center text-xl font-bold">Loading...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className="text-center text-red-500 text-lg">{error}</div>;
   }
-  console.log(userDetails)
+
   return (
-    <div className="w-full  bg-white p-6 mt-20 ">
-      <div className="dashboard">
-        <h2>Welcome to the Dashboard</h2>
-        {userRole === "admin" && <p>Admin Controls</p>}
-        {userRole === "Moderator" && <p>Moderator Controls</p>}
-        <p>User Role: {userRole}</p>
-      </div>
-      <div className=" mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-6">
-        <div className="md:flex">
-          <div className="md:flex-shrink-0">
-            {/* <img
-              className="h-48 w-[90%] md:w-48 object-cover m-[5%] my-8"
+    <div className="w-full  bg-gradient-to-br from-blue-900 via-purple-800 to-gray-900 p-8 pt-4 mt-16">
+      <div className="max-w-4xl mx-auto">
+        {/* Welcome Section */}
+        <motion.div
+          className="bg-white rounded-lg shadow-lg p-6 mb-8"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-2xl font-bold text-gray-800">
+            Welcome, {userDetails.first_name} {userDetails.last_name}
+          </h2>
+          <p className="text-gray-600 mt-2">
+            Your role:{" "}
+            <span className="text-blue-600 font-semibold">{userRole}</span>
+          </p>
+        </motion.div>
+
+        {/* Profile Section */}
+        <motion.div
+          className="flex flex-col md:flex-row bg-white rounded-lg shadow-xl overflow-hidden"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Profile Image */}
+          <div className="md:w-1/3 bg-gray-200 flex items-center justify-center p-6">
+            <img
               src={userDetails?.cover || "/userprofileimage.jpeg"}
               alt="Profile"
-            /> */}
+              className="rounded-full h-32 w-32 shadow-lg"
+            />
           </div>
-          <div className="p-8">
-            <a
-              className="block mt-1 text-lg leading-tight font-medium text-black "
-            >
+          {/* Profile Details */}
+          <div className="p-6 md:w-2/3">
+            <h3 className="text-xl font-bold text-gray-800">
               {userDetails.first_name} {userDetails.last_name}
-            </a>
-            <p className="mt-2 text-gray-500"> {userDetails.email}</p>
-            <a className="text-blue-500 ">
+            </h3>
+            <p className="text-gray-600 mt-2">{userDetails.email}</p>
+            <p className="text-gray-600 mt-2">
               {userDetails.country_code} {userDetails.mobile}
-            </a>
-
-            {/* <div className="mt-4  flex flex-wrap gap-2">
-              <span className="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
-                Premium Luxury Traveller (2018-2020)
+            </p>
+            <p className="text-gray-600 mt-4">
+              Account Status:{" "}
+              <span
+                className={`font-semibold ${userDetails.status === "active"
+                    ? "text-green-500"
+                    : "text-red-500"
+                  }`}
+              >
+                {userDetails.status}
               </span>
-              <span className="bg-purple-100 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
-                Top 1% Satisfied Customer (2019)
-              </span>
-              <span className="bg-pink-100 text-pink-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
-                Top 10% Sales Reviewer (2021)
-              </span>
-            </div> */}
+            </p>
           </div>
-        </div>
-      </div>
+        </motion.div>
 
+        {/* Decorative Animation */}
+        <motion.div
+          className="w-full mt-12"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2 }}
+        >
+          <div className="rounded-lg shadow-lg bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 p-4">
+            <h3 className="text-white text-lg text-center font-semibold">
+              Explore Your Dashboard!
+            </h3>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };
