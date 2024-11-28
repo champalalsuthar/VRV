@@ -11,6 +11,7 @@ import api from "./utils/api";
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
 import ServicesPage from "./components/ServicesPage";
+import Footer from "./components/Footor";
 
 
 const App = () => {
@@ -79,6 +80,7 @@ const App = () => {
           }
         />
       </Routes>
+      <Footer />
     </>
   );
 };

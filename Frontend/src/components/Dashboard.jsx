@@ -69,15 +69,15 @@ const Dashboard = () => {
           transition={{ duration: 0.8 }}
         >
           {/* Profile Image */}
-          <div className="md:w-1/3 bg-gray-200 flex items-center justify-center p-6">
+          <div className="md:w-1/4 bg-gray-200 flex items-center justify-center p-4">
             <img
               src={userDetails?.cover || "/userprofileimage.jpeg"}
               alt="Profile"
-              className="rounded-full h-32 w-32 shadow-lg"
+              className="rounded-full h-40 w-40  shadow-lg"
             />
           </div>
           {/* Profile Details */}
-          <div className="p-6 md:w-2/3">
+          <div className="p-4 md:w-3/4">
             <h3 className="text-xl font-bold text-gray-800">
               {userDetails.first_name} {userDetails.last_name}
             </h3>
@@ -89,8 +89,8 @@ const Dashboard = () => {
               Account Status:{" "}
               <span
                 className={`font-semibold ${userDetails.status === "active"
-                    ? "text-green-500"
-                    : "text-red-500"
+                  ? "text-green-500"
+                  : "text-red-500"
                   }`}
               >
                 {userDetails.status}
@@ -101,7 +101,7 @@ const Dashboard = () => {
 
         {/* Decorative Animation */}
         <motion.div
-          className="w-full mt-12"
+          className="w-full mt-10"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2 }}

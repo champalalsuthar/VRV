@@ -33,12 +33,16 @@ const Navbar = () => {
           </button>
           <Link
             to="/"
-            className="text-3xl font-bold text-black"
+            className="text-3xl font-bold text-black flex justify-center gap-2"
             style={{
               WebkitBackgroundClip: "text",
             }}
           >
-            VRV
+            <img
+              src={"/logo.jpeg"}
+              alt="logo"
+              className="rounded-full h-10 w-10 shadow-lg contain border border-black"
+            /><span>VRV</span>
           </Link>
         </div>
 
