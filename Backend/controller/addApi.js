@@ -8,6 +8,7 @@ const verifyToken = async (req, res) => {
 
         if (!authToken) {
             return res
+            
                 .status(401)
                 .json({ success: false, error: "No token provided" });
         }
