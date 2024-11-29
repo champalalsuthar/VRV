@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false); // Mobile menu toggle state
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const userRole = useSelector((state) => state.auth.userRole);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -82,7 +83,7 @@ const Navbar = () => {
           {isAuthenticated ? (
             <>
               <Link
-                to="/dashboard"
+                to={`/dashboard/${userRole}`}
                 className="text-lg font-medium text-black hover:text-gray-200 transition duration-300"
               >
                 <span className="flex items-center gap-2">
@@ -164,7 +165,7 @@ const Navbar = () => {
               <>
                 <li>
                   <Link
-                    to="/dashboard"
+                    to={`/dashboard/${userRole}`}
                     className="text-black font-medium hover:text-gray-200 transition duration-300"
                     onClick={() => setMenuOpen(false)}
                   >
