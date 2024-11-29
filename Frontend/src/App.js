@@ -96,14 +96,14 @@ const App = () => {
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
-          }
+          }/>
         <Route
           path="/dashboard/moderator"
           element={
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
-          }
+          }/>
         <Route
           path="/dashboard/admin"
           element={
