@@ -91,21 +91,21 @@ const App = () => {
         <Route path="/aboutus" element={< AboutUs />} />
         <Route path="/services" element={< ServicesPage />} />
         <Route
-          path="/dashboard/User"
+          path="/dashboard/user"
           element={
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
           }
         <Route
-          path="/dashboard/Moderator"
+          path="/dashboard/moderator"
           element={
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
           }
         <Route
-          path="/dashboard/Admin"
+          path="/dashboard/admin"
           element={
             <ProtectedRoute>
               <Dashboard />
