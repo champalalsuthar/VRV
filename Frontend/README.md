@@ -1,70 +1,151 @@
-# Getting Started with Create React App
+# RBAC Authentication and Dashboard System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview  
+This project demonstrates a **Role-Based Access Control (RBAC)** system with authentication and authorization. Users can register, log in, and access dashboards based on their roles (**Admin, Moderator, or User**). The project implements secure authentication, private routing, role-specific features, and token expiry handling, providing a seamless and secure experience.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features  
 
-### `npm start`
+### 1. Authentication System  
+**Signup:**  
+- Registers a new user with a hashed password.  
+- Validates unique email and strong password rules.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Login:**  
+- Authenticates users with email and password.  
+- Generates a JWT token and stores it securely in `localStorage`.  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Logout:**  
+- Clears token and user data from `localStorage`.  
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. Role-Based Access Control (RBAC)  
+**Dynamic Role-Based Routes:**  
+- Redirects users to their role-specific dashboards (`/dashboard/{userRole}`).  
+- Prevents unauthorized access to other dashboards.  
 
-### `npm run build`
+**Private Routes:**  
+- Ensures only logged-in users can access restricted pages.  
+- Role validation enforced on route access.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**API Access Control:**  
+- Fetches user data (`getUserDataById`) based on role validation.  
+- Ensures actions and resources are role-specific.  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3. Security Features  
+**JWT Token:**  
+- Used for stateless authentication.  
+- Includes an expiry time to ensure the token is valid only for a limited period.  
+- On expiry, the system prompts the user to log in again, removing the expired token from `localStorage`.  
 
-### `npm run eject`
+**Password Hashing:**  
+- Passwords are hashed using `bcrypt` for secure storage.  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Token Validation:**  
+- Ensures expired or invalid tokens are removed from `localStorage`.  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 4. Additional Enhancements  
+**State Management:**  
+- Redux is used to manage authentication, user roles, and API states.  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Loading Indicators:**  
+- Enhances UX during API calls.  
 
-## Learn More
+**Improved UI:**  
+- Modernized design with 3D animations.  
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Content Credit:**  
+- The content is adapted from an existing VRV website, with UI and functionality upgraded.  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Technologies Used  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Frontend:**  
+- React (with Redux for state management).  
+- React Router for navigation and private routes.  
+- Tailwind, Modern CSS and animations for styling.  
 
-### Analyzing the Bundle Size
+**Backend:**  
+- Node.js with Express for RESTful APIs.  
+- MongoDB (or your preferred database) for storing user data.  
+- bcrypt for password hashing.  
+- jsonwebtoken (JWT) for authentication.  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Other Tools:**  
+- Postman/Thunder Client for API testing.  
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Installation and Setup  
 
-### Advanced Configuration
+**Clone the Repository:**  
+```bash
+git clone https://github.com/champalalsuthar/VRV
+```
+**Install Dependencies:**
+- For Backend:
+```bash
+cd backend
+npm install]
+```
+- For Frontend:
+```bash
+cd frontend
+npm install]
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Run the Project:**
+- Start Backend:
+```bash
+cd backend
+npm node app.js
+```
+- Start Frontend:
+```bash
+cd frontend
+npm start
+```
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Access the Application:
+Open your browser and navigate to ```http://localhost:3000.```
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Folder Structure
+### Backend
+```bash
+/backend
+|-- controllers/      # API logic
+|-- middlewares/      # Authentication and Role validation middleware
+|-- models/           # Mongoose schemas for Users, Roles, etc.
+|-- routes/           # API routes
+|-- app.js            # Main server file
+```
+### Frontend
+```bash
+/frontend
+|-- src/
+    |-- components/   # UI components
+    |-- pages/        # Pages (Home, About, Services, etc.)
+    |-- redux/        # Redux slices for state management
+    |-- utils/        # Helper functions
+    |-- App.js        # Main React app file
+```
+
+## Future Enhancements
+- Implement refresh tokens for improved session management.
+- Add audit logs for admin actions.
+- Include Two-Factor Authentication (2FA).
+## Acknowledgments
+- Content Credit: Original content and ideas adapted from the VRV website.
+- UI Enhancements: Redesigned with modern aesthetics and animations.
+
+
