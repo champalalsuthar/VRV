@@ -27,7 +27,6 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   return (
     <>
       {children}
-      <ToastContainer /> {/* Make sure to render ToastContainer to show toast messages */}
     </>
   );
 };
