@@ -90,22 +90,24 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/login"
-          element={
-            <ProtectedRouteAuth>
-              <Login />
-            </ProtectedRouteAuth>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <ProtectedRouteAuth>
-              <Signup />
-            </ProtectedRouteAuth>
-          }
-        />
+        // <Route
+        //   path="/login"
+        //   element={
+        //     <ProtectedRouteAuth>
+        //       <Login />
+        //     </ProtectedRouteAuth>
+        //   }
+        // />
+        // <Route
+        //   path="/signup"
+        //   element={
+        //     <ProtectedRouteAuth>
+        //       <Signup />
+        //     </ProtectedRouteAuth>
+        //   }
+        // />
+        <Route path="/login" element={< Login />} />
+        <Route path="/signup" element={< Signup />} />
         <Route path="/aboutus" element={< AboutUs />} />
         <Route path="/services" element={< ServicesPage />} />
         <Route
