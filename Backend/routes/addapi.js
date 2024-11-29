@@ -48,7 +48,7 @@ router.post(
                 },
             };
 
-            const authToken = jwt.sign(data, process.env.JWT_SECRET);
+            const authToken = jwt.sign(data, process.env.JWT_SECRET, { expiresIn: '1h' });
             res.send({ success: true, authToken, userid: existingUser._id, user: existingUser, message: "Login successfully" });
         } catch (error) {
             res.status(500).send("Internal server error");
