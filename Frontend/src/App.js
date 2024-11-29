@@ -16,6 +16,8 @@ import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loading from "./components/Loading";
 import { verifyToken } from "./API/verifyToken";
+import PageNotFound  from "./pages/PageNotFound";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 
 const App = () => {
@@ -70,6 +72,7 @@ const App = () => {
 
   return (
     <>
+    <ErrorBoundary>
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -112,8 +115,10 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
+      </ErrorBoundary>
     </>
   );
 };
