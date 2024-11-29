@@ -17,6 +17,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const userRoleLower = userRole ? userRole.toLowerCase() : "";
 
   const handleLogout = () => {
     dispatch(logout());
@@ -83,7 +84,7 @@ const Navbar = () => {
           {isAuthenticated ? (
             <>
               <Link
-                to={`/dashboard/${userRole}`}
+                to={`/dashboard/${userRoleLower}`}
                 className="text-lg font-medium text-black hover:text-gray-200 transition duration-300"
               >
                 <span className="flex items-center gap-2">
@@ -165,7 +166,7 @@ const Navbar = () => {
               <>
                 <li>
                   <Link
-                    to={`/dashboard/${userRole}`}
+                    to={`/dashboard/${userRoleLower}`}
                     className="text-black font-medium hover:text-gray-200 transition duration-300"
                     onClick={() => setMenuOpen(false)}
                   >
