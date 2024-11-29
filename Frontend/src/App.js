@@ -91,7 +91,21 @@ const App = () => {
         <Route path="/aboutus" element={< AboutUs />} />
         <Route path="/services" element={< ServicesPage />} />
         <Route
-          path="/dashboard"
+          path="/dashboard/User"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        <Route
+          path="/dashboard/Moderator"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        <Route
+          path="/dashboard/Admin"
           element={
             <ProtectedRoute>
               <Dashboard />
