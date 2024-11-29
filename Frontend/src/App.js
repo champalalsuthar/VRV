@@ -93,21 +93,21 @@ const App = () => {
         <Route
           path="/dashboard/user"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute requiredRole="user">
               <Dashboard />
             </ProtectedRoute>
           }/>
         <Route
           path="/dashboard/moderator"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute requiredRole="moderator">
               <Dashboard />
             </ProtectedRoute>
           }/>
         <Route
           path="/dashboard/admin"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute requiredRole="admin">
               <Dashboard />
             </ProtectedRoute>
           }
