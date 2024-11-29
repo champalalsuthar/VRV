@@ -12,6 +12,8 @@ import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
 import ServicesPage from "./components/ServicesPage";
 import Footer from "./components/Footor";
+import { ToastContainer, toast, Flip } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const App = () => {
@@ -64,6 +66,19 @@ const App = () => {
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Flip}
+      />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -6,6 +6,9 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { MdAccountCircle, MdMiscellaneousServices } from "react-icons/md";
 import { GoHome, GoPeople } from "react-icons/go";
 import { IoLogInOutline } from "react-icons/io5";
+import { ToastContainer, toast, Flip } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false); // Mobile menu toggle state
@@ -18,6 +21,7 @@ const Navbar = () => {
     dispatch(logout());
     navigate("/login");
     setMenuOpen(false); // Close the menu after logout
+    toast.success('LogOut Successfully');
   };
 
   return (

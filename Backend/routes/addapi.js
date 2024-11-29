@@ -49,7 +49,7 @@ router.post(
             };
 
             const authToken = jwt.sign(data, process.env.JWT_SECRET);
-            res.send({ success: true, authToken, userid: existingUser._id, user: existingUser });
+            res.send({ success: true, authToken, userid: existingUser._id, user: existingUser, message: "Login successfully" });
         } catch (error) {
             res.status(500).send("Internal server error");
         }
@@ -75,7 +75,7 @@ router.post(
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { first_name, last_name, email, password, gender, mobile } = req.body;
+        const { first_name, last_name, email, password, gender, mobile, type } = req.body;
 
         try {
             let existingUser = await User.findOne({ email: email });
@@ -96,7 +96,7 @@ router.post(
                 password: hashedPassword,
                 gender,
                 mobile,
-                type: "user",
+                type,
                 status: "active",
                 created_at: new Date().toISOString(),
             });

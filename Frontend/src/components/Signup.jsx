@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../redux/slices/authSlice";
 import api from "../utils/api";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import { register } from "../API/register";
+
+import { ToastContainer, toast, Flip } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -33,7 +37,7 @@ const Signup = () => {
         mobile: "",
         gender: "male",
         country_code: "+91",
-        type: "user",
+        type: "User",
         cover: "",
         status: "active",
     });
@@ -41,7 +45,7 @@ const Signup = () => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-
+    console.log(formData.type);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,7 +53,7 @@ const Signup = () => {
             ...prevData,
             [name]: value,
         }));
-
+        console.log(name, value)
         // Validate only the specific field
         const error = validateField(name, value); // validate the changed field
         setErrors((prevErrors) => ({
@@ -107,28 +111,26 @@ const Signup = () => {
         if (Object.keys(validationErrors).length > 0) {
             return;
         }
+        let datatosend = {
+            first_name: formData.first_name,
+            last_name: formData.last_name,
+            email: formData.email,
+            password: formData.password,
+            mobile: formData.mobile,
+            gender: formData.gender,
+            country_code: formData.country_code,
+            type: formData.type,
+            cover: formData.cover,
+            status: formData.status,
+        };
         try {
-            const response = await api.post("/api/register", {
-                first_name: formData.first_name,
-                last_name: formData.last_name,
-                email: formData.email,
-                password: formData.password,
-                mobile: formData.mobile,
-                gender: formData.gender,
-                country_code: formData.country_code,
-                type: formData.type,
-                cover: formData.cover,
-                status: formData.status,
-            });
-            console.log(response)
-            console.log(response.data)
-            if (response.data.success) {
-                navigate("/login");
-            }
-            console.log(response.data.message)
-
+            const response = await register(datatosend);
+            console.log(response);
+            navigate("/login");
+            toast.success(response.message);
         } catch (error) {
-            console.error("signup failed", error);
+            console.error("Registration error:", error);
+            toast.error(error.message || "An error occurred during registration");
         }
     };
 
@@ -227,6 +229,7 @@ const Signup = () => {
                             <p className="text-red-500 text-sm">{errors.mobile}</p>
                         )}
                     </div>
+
                     <div>
                         <label
                             htmlFor="gender"
@@ -249,7 +252,28 @@ const Signup = () => {
                             <p className="text-red-500 text-sm">{errors.gender}</p>
                         )}
                     </div>
-
+                    <div>
+                        <label
+                            htmlFor="type"
+                            className="block text-sm font-medium text-gray-700"
+                        >
+                            Type
+                        </label>
+                        <select
+                            name="type"
+                            id="type"
+                            value={formData.type}
+                            onChange={handleChange}
+                            className="w-full px-3 py-2 outline-none border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
+                        >
+                            <option value="User">User</option>
+                            <option value="Moderator">Moderator</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                        {errors.type && (
+                            <p className="text-red-500 text-sm">{errors.type}</p>
+                        )}
+                    </div>
 
                     {/* Password Input */}
                     <div>
