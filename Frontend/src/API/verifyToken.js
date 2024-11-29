@@ -6,10 +6,9 @@ export const verifyToken = async (token) => {
   try {
     const response = await axios.post(
       `${SITE_CONFIG.apiIPMongo}/api/verifytoken`,
-      {},
+      { authToken: token },
       {
         headers: {
-          AuthToken: token,
           Authorization: `Bearer ${SITE_CONFIG.apiToken}`,
         },
       }
