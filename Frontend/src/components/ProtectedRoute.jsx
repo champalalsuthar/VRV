@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { ToastContainer, toast, Flip } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
