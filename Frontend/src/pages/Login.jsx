@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../redux/slices/authSlice";
@@ -22,6 +22,7 @@ const validatePassword = (password) => {
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); 
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -30,6 +31,12 @@ const Login = () => {
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate("/");  // Redirect to homepage if authenticated
+        }
+    }, [isAuthenticated, navigate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
