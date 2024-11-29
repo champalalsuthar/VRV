@@ -111,19 +111,19 @@ const AboutUs = () => {
             </section>
 
             {/* Call to Action Section */}
-            {/* <section className="py-16 bg-gradient-to-r from-blue-700 to-indigo-900 text-white text-center">
+            <section className="py-16 bg-gradient-to-r from-blue-700 to-indigo-900 text-white text-center">
                 <h2 className="text-4xl font-bold mb-6">Join Us in Shaping the Future</h2>
                 <p className="text-lg mb-8">
                     Ready to secure your digital assets with cutting-edge solutions? Let’s
                     work together to make the digital world a safer place.
                 </p>
                 <a
-                    href="/contact"
+                    // href="/contact"
                     className="bg-yellow-400 text-blue-800 px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition"
                 >
                     Contact Us
                 </a>
-            </section> */}
+            </section>
         </div>
     );
 };

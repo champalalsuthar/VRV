@@ -68,25 +68,15 @@ const Login = () => {
         try {
             const response = await userLogin(datatosend);
             console.log(response);
-            // toast.success(response.message);
             if (response.success) {
-                toast.success(  "Login Successfully")
-                navigate("/");
+                dispatch(login({ token: response.authToken, role: response.user.type, user: response.user, id: response.user._id })); // Assuming backend provides token and role
+                navigate("/dashboard");
+                toast.success(`Logged in as ${response.user.type}`)
             }
         } catch (error) {
             console.error("Login error:", error);
             toast.error(error.message || "An error occurred during Login");
         }
-        // try {
-        //     const response = await api.post("/api/login", { email: formData.email, password: formData.password });
-        //     console.log(response)
-        //     console.log(response.data)
-        //     dispatch(login({ token: response.data.authToken, role: response.data.user.type, user: response.data.user, id: response.data.user._id })); // Assuming backend provides token and role
-        //     navigate("/dashboard");
-        //     toast.success('Login Successfully');
-        // } catch (error) {
-        //     console.error("Login failed", error);
-        // }
     };
 
     return (

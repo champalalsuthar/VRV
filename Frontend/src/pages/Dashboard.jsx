@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion"; // For animations
 import api from "../utils/api";
+import Loading from "../components/Loading";
+import { getuserbyid } from "../API/getuserbyid";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../redux/slices/authSlice";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userRole = useSelector((state) => state.auth.userRole);
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -16,16 +21,18 @@ const Dashboard = () => {
     if (!_id) {
       setError("User ID not found");
       setLoading(false);
+      dispatch(logout());
+      navigate("/login");
       return;
     }
 
     const fetchData = async () => {
       try {
-        const response = await api.post("/api/getuserdatabyid", { _id });
-        setUserDetails(response.data.user);
+        const response = await getuserbyid(_id)
+        setUserDetails(response.user);
       } catch (err) {
         console.error("Login failed", err);
-        setError("Login failed");
+        setError("Error in Data feching");
       } finally {
         setLoading(false);
       }
@@ -35,7 +42,7 @@ const Dashboard = () => {
   }, []);
 
   if (loading) {
-    return <div className="text-center text-xl font-bold">Loading...</div>;
+    return <div className="w-full flex justify-center items-center h-screen"><Loading /></div>;
   }
 
   if (error) {

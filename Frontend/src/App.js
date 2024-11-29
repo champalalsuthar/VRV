@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Dashboard from "./components/Dashboard";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { login, logout } from "./redux/slices/authSlice";
 import api from "./utils/api";
-import Home from "./components/Home";
-import AboutUs from "./components/AboutUs";
-import ServicesPage from "./components/ServicesPage";
+import Home from "./pages/Home";
+import AboutUs from "./pages/AboutUs";
+import ServicesPage from "./pages/ServicesPage";
 import Footer from "./components/Footor";
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loading from "./components/Loading";
 
 
 const App = () => {
@@ -61,7 +62,7 @@ const App = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="w-full flex justify-center items-center h-screen"><Loading /></div>;
   }
 
   return (
