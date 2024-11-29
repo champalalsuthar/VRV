@@ -70,8 +70,13 @@ const Login = () => {
             console.log(response);
             if (response.success) {
                 dispatch(login({ token: response.authToken, role: response.user.type, user: response.user, id: response.user._id })); // Assuming backend provides token and role
-                
-                navigate(`/dashboard/${response.user.type}`);
+                if(response.user.type==="User")
+                    navigate("/dashboard/user");
+                else if (response.user.type==="Admin")
+                    navigate("/dashboard/admin");
+                 else if (response.user.type==="Moderator")
+                    navigate("/dashboard/moderator");
+                else navigate("/");
                 toast.success(`Logged in as ${response.user.type}`)
             }
         } catch (error) {
