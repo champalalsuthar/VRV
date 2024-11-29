@@ -15,6 +15,7 @@ import Footer from "./components/Footor";
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loading from "./components/Loading";
+import { verifyToken } from "./API/verifyToken";
 
 
 const App = () => {
@@ -24,21 +25,23 @@ const App = () => {
 
   // Verify token on app load
   useEffect(() => {
-    const verifyToken = async () => {
+    const verifyTokenFunction = async () => {
       const authToken = localStorage.getItem("token");
       const userId = localStorage.getItem("id");
 
       if (authToken && userId) {
         try {
-          const response = await api.post("/api/verifytoken", { authToken });
+          const response = await verifyToken(authToken);
 
-          if (response.data.success) {
+          // const response = await api.post("/api/verifytoken", { authToken });
+
+          if (response.success) {
             dispatch(
               login({
                 token: authToken,
-                role: response.data.user.type,
-                user: response.data.user,
-                id: response.data.user._id,
+                role: response.user.type,
+                user: response.user,
+                id: response.user._id,
               })
             );
           } else {
@@ -58,7 +61,7 @@ const App = () => {
       setLoading(false); // Finish loading
     };
 
-    verifyToken();
+    verifyTokenFunction();
   }, []);
 
   if (loading) {
