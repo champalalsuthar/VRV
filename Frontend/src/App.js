@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRouteAuth from "./components/ProtectedRouteAuth";
 import { login, logout } from "./redux/slices/authSlice";
 import api from "./utils/api";
 import Home from "./pages/Home";
@@ -89,8 +90,22 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={< Signup />} />
+        <Route
+          path="/login"
+          element={
+            <ProtectedRouteAuth>
+              <Login />
+            </ProtectedRouteAuth>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <ProtectedRouteAuth>
+              <Signup />
+            </ProtectedRouteAuth>
+          }
+        />
         <Route path="/aboutus" element={< AboutUs />} />
         <Route path="/services" element={< ServicesPage />} />
         <Route
